@@ -7,10 +7,15 @@
 
 class Parser {
     Lexer lexer;
+    std::string chroot_dir;
+    int cur=0;
+    void parseStatement() {
+
+    }
 public:
-    Parser(const std::string& filename): lexer(filename) {
-        for (const auto& token : lexer.tokens) {
-            std::cout << "Token: \'" << token <<'\''<< std::endl;
+    Parser(const std::string& filename,const std::string& chroot_dir): lexer(filename),chroot_dir(chroot_dir) {
+        while (cur<lexer.tokens.size()) {
+            parseStatement();
         }
     }
 };

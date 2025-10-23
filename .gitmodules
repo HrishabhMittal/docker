@@ -1,0 +1,3 @@
+[submodule "src/JASON"]
+	path = src/JASON
+	url = https://github.com/HrishabhMittal/JASON.git

@@ -7,8 +7,9 @@
 #include <iostream>
 #include <unistd.h>
 #include <filesystem>
-int sandbox(int& child_pid,const std::string& chroot_dir,const std::function<void()>& child_func,const std::function<void()>& parent_func) {
+int sandbox(int& child_pid,const std::string& chroot_dir,const std::function<void()>& setup_func,const std::function<void()>& child_func,const std::function<void()>& parent_func) {
     unshare(CLONE_NEWUSER|CLONE_NEWPID|CLONE_NEWNS);
+    setup_func();
     child_pid=fork();
     if (child_pid==-1) {
         std::cerr<<"Fork failed"<<std::endl;
