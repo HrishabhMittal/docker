@@ -1,3 +1,4 @@
+#pragma once
 #include <fstream>
 #include <iostream>
 #include <ostream>
@@ -61,6 +62,7 @@ public:
     Lexer(const std::string& filename) {
         std::ifstream file(filename);
         while (gettoken(file));
+        for (auto i:tokens) std::cout<<"\""<<i<<"\""<<std::endl;
         file.close();
     }
     

@@ -1,3 +1,4 @@
+#pragma once
 #include <fstream>
 #include <ios>
 #include <string>
@@ -45,6 +46,20 @@ int exec(const std::vector<std::string>& args) {
         return 1;
     }
     return 0;
+}
+int run(const std::vector<std::string>& args) {
+    int child_pid=fork();
+    if (child_pid==-1) {
+        std::cerr<<"Fork failed"<<std::endl;
+        return 1;
+    } else if (child_pid == 0) {
+        exec(args);
+        return 0;
+    } else {
+        int status;
+        waitpid(child_pid,&status,0);
+        return status;
+    }
 }
 class temp_dir {
 public:
